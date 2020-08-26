@@ -20,8 +20,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #define USE_I2C
-#define TAPPING_TOGGLE 2
 #define MASTER_LEFT
+
+#define TAPPING_TOGGLE 2
+#define TAPPING_TERM 200
 
 
 // wiring of each half
