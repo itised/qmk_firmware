@@ -5,10 +5,11 @@
 #define INDICATOR_LED_3 F4
 
 #define _QWERTY 0
-#define _LOL 1
-#define _SYMBOLS 2
-#define _MOUSE 3
-#define _QMK_FUNCTIONS 4
+#define _COLEMAK_DHM 1
+#define _LOL 2
+#define _SYMBOLS 3
+#define _MOUSE 4
+#define _QMK_FUNCTIONS 5
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
@@ -56,9 +57,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_DEL,         KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOT,
         TD(TD_SFTLK),   KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                                                                           KC_N,           KC_M,           KC_COMM,        KC_DOT,         KC_SLSH,        TD(TD_SFTLK),
                                         LGUI(KC_GRV),   SGUI(KC_GRV),                                                                                                                                                   SGUI(KC_LBRC),  SGUI(KC_RBRC),
-                                                                        TT(2),          KC_SPC,                                                                                         KC_ENT,         TT(2),
+                                                                        TT(_SYMBOLS),   KC_SPC,                                                                                         KC_ENT,         TT(_SYMBOLS),
                                                                                                         KC_LCTL,        KC_LGUI,                        KC_RGUI,        KC_RALT,
-                                                                                                        TT(1),          KC_LALT,                        KC_RCTL,        TT(3)
+                                                                                                        TT(_LOL),       KC_LALT,                        KC_RCTL,        TT(_COLEMAK_DHM)
+    ),
+    [_COLEMAK_DHM] = LAYOUT_6x6(
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,                                                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,                                                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_Q,           KC_W,           KC_F,           KC_P,           KC_B,                                                                                           KC_J,           KC_L,           KC_U,           KC_Y,           KC_SCLN,        KC_TRNS,
+        KC_TRNS,        KC_A,           KC_R,           KC_S,           KC_T,           KC_G,                                                                                           KC_M,           KC_N,           KC_E,           KC_I,           KC_O,           KC_TRNS,
+        KC_TRNS,        KC_Z,           KC_X,           KC_C,           KC_D,           KC_V,                                                                                           KC_K,           KC_H,           KC_COMM,        KC_DOT,         KC_SLSH,        KC_TRNS,
+                                        KC_TRNS,         KC_TRNS,                                                                                                                                                       KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,                                                                                        KC_TRNS,        KC_TRNS,
+                                                                                                         KC_TRNS,       KC_TRNS,                        KC_TRNS,         KC_TRNS,
+                                                                                                         KC_TRNS,       KC_TRNS,                        KC_TRNS,         KC_TRNS
     ),
     [_LOL] = LAYOUT_6x6(
         KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,       KC_TRNS,        KC_TRNS,                                                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
@@ -67,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,           KC_W,            KC_E,          KC_R,           KC_6,                                                                                           KC_PSLS,        KC_P4,          KC_P5,          KC_P6,          KC_PMNS,        KC_TRNS,
         KC_TRNS,        KC_B,           KC_Z,            KC_D,          KC_F,           KC_7,                                                                                           KC_PCMM,        KC_P1,          KC_P2,          KC_P3,          KC_PEQL,        KC_TRNS,
                                         KC_NO,           KC_NO,                                                                                                                                                         KC_P0,          KC_PDOT,
-                                                                        KC_TRNS,        KC_S,                                                                                           KC_TRNS,        KC_TRNS,
+                                                                        KC_GRV,         KC_S,                                                                                           KC_TRNS,        KC_TRNS,
                                                                                                          KC_TRNS,       KC_SPC,                         KC_TRNS,        KC_TRNS,
                                                                                                          KC_TRNS,       KC_TRNS,                        KC_TRNS,        KC_TRNS
     ),
@@ -100,19 +112,24 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         writePin(INDICATOR_LED_2, 0);
         writePin(INDICATOR_LED_3, 0);
         break;
-    case _LOL:
+    case _COLEMAK_DHM:
         writePin(INDICATOR_LED_1, 1);
         writePin(INDICATOR_LED_2, 0);
         writePin(INDICATOR_LED_3, 0);
         break;
-    case _SYMBOLS:
+    case _LOL:
         writePin(INDICATOR_LED_1, 0);
         writePin(INDICATOR_LED_2, 1);
         writePin(INDICATOR_LED_3, 0);
         break;
-    case _MOUSE:
+    case _SYMBOLS:
         writePin(INDICATOR_LED_1, 1);
         writePin(INDICATOR_LED_2, 1);
+        writePin(INDICATOR_LED_3, 0);
+        break;
+    case _MOUSE:
+        writePin(INDICATOR_LED_1, 0);
+        writePin(INDICATOR_LED_2, 0);
         writePin(INDICATOR_LED_3, 0);
         break;
     case _QMK_FUNCTIONS:
@@ -207,6 +224,7 @@ void sftlk_finished(qk_tap_dance_state_t *state, void *user_data) {
             register_code(KC_LSFT);
             break;
         case DOUBLE_SINGLE_TAP:
+            togglePin(INDICATOR_LED_3);
             tap_code(KC_CAPS);
     }
 }
