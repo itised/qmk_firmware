@@ -110,37 +110,30 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case _QWERTY:
         writePin(INDICATOR_LED_1, 0);
         writePin(INDICATOR_LED_2, 0);
-        writePin(INDICATOR_LED_3, 0);
         break;
     case _COLEMAK_DHM:
         writePin(INDICATOR_LED_1, 1);
         writePin(INDICATOR_LED_2, 0);
-        writePin(INDICATOR_LED_3, 0);
         break;
     case _LOL:
         writePin(INDICATOR_LED_1, 0);
         writePin(INDICATOR_LED_2, 1);
-        writePin(INDICATOR_LED_3, 0);
         break;
     case _SYMBOLS:
         writePin(INDICATOR_LED_1, 1);
         writePin(INDICATOR_LED_2, 1);
-        writePin(INDICATOR_LED_3, 0);
         break;
     case _MOUSE:
         writePin(INDICATOR_LED_1, 0);
         writePin(INDICATOR_LED_2, 0);
-        writePin(INDICATOR_LED_3, 0);
         break;
     case _QMK_FUNCTIONS:
-        writePin(INDICATOR_LED_1, 1);
-        writePin(INDICATOR_LED_2, 1);
-        writePin(INDICATOR_LED_3, 1);
+        writePin(INDICATOR_LED_1, 0);
+        writePin(INDICATOR_LED_2, 0);
         break;
     default: //  for any other layers, or the default layer
-        writePin(INDICATOR_LED_1, 1);
-        writePin(INDICATOR_LED_2, 1);
-        writePin(INDICATOR_LED_3, 1);
+        writePin(INDICATOR_LED_1, 0);
+        writePin(INDICATOR_LED_2, 0);
         break;
     }
   return state;
