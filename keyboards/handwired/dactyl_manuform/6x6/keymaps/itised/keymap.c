@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         LGUI(KC_GRV),   SGUI(KC_GRV),                                                                                                                                                   SGUI(KC_LBRC),  SGUI(KC_RBRC),
                                                                         TT(_SYMBOLS),   KC_SPC,                                                                                         KC_ENT,         TT(_SYMBOLS),
                                                                                                         KC_LCTL,        KC_LGUI,                        KC_RGUI,        KC_RALT,
-                                                                                                        TT(_LOL),       KC_LALT,                        KC_RCTL,        KC_HYPER
+                                                                                                        TT(_LOL),       KC_LALT,                        KC_RCTL,        KC_HYPR
     ),
     [_COLEMAK_DHM] = LAYOUT_6x6(
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,                                                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
